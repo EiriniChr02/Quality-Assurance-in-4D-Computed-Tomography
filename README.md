@@ -27,6 +27,26 @@ The project evaluates the geometric and volumetric accuracy of 4D-CT scanners wh
 *   **Gaussian Fitting Method (Point/Wire Sources):** Fits a continuous Gaussian curve to the discrete raw pixel data (LSF) using `fminsearch`, mitigating aliasing and background noise. Computes the FFT to extract the exact Modulation Transfer Function (MTF) at 50% and 10%[cite: 21].
 *   **Peak-Valley Method (Bar Patterns):** Calculates the Contrast Transfer Function (CTF) utilizing local minima and maxima across varying line-pair frequencies ($lp/cm$)[cite: 22].
 
+<p align="center">
+  <img src="images/beadmtf.png" alt="" width="600">
+  <img src="images/Gaussian_Fit_MTF_wire.png" alt="" width="600">
+  <br>
+  <em>Figure 1: Modulation Transfer Function (MTF) using the Angled Wire and
+bead source. The Line Spread Function (LSF) profile: raw pixel data (blue dots) are fitted with a
+Gaussian curve (red line) to correct for noise and undersampling. The calculated MTF curve derived
+from the Fourier Transform of the fitted Gaussian, showing the spatial frequencies at 50% and 10%
+modulation.</em>
+</p>
+
+<p align="center">
+  <img src="images/CTF Curve Analysis.png" alt = "" width="600">
+   <br>
+  <em>Figure 2: Contrast Transfer Function (CTF) curve obtained from the discrete line pairs of the
+CTP732 module using the Peak-Valley method. The data points represent the modulation depth mea-
+sured at specific spatial frequencies. The curve demonstrates a 50% contrast resolution at 3.53 lp/cm,
+reflecting the impact of aliasing and standard sampling on image quality compared to the idealized
+MTF.</em>
+</p>
 ---
 
 ## Scientific Context & Clinical Impact
