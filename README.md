@@ -28,18 +28,15 @@ The project evaluates the geometric and volumetric accuracy of 4D-CT scanners wh
 *   **Peak-Valley Method (Bar Patterns):** Calculates the Contrast Transfer Function (CTF) utilizing local minima and maxima across varying line-pair frequencies ($lp/cm$)[cite: 22].
 
 <p align="center">
-  <img src="images/beadmtf.png" alt="" width="600">
-  <img src="images/Gaussian_Fit_MTF_wire.png" alt="" width="600">
+  <img src="images/beadmtf.jpg" alt="Bead MTF" width="400">
   <br>
-  <em>Figure 1: Modulation Transfer Function (MTF) using the Angled Wire and
-bead source. The Line Spread Function (LSF) profile: raw pixel data (blue dots) are fitted with a
-Gaussian curve (red line) to correct for noise and undersampling. The calculated MTF curve derived
-from the Fourier Transform of the fitted Gaussian, showing the spatial frequencies at 50% and 10%
-modulation.</em>
+  <img src="images/Gaussian_Fit_MTFwire.png" alt="Wire MTF" width="400">
+  <br>
+  <em>Figure 1: Modulation Transfer Function (MTF) using the bead source and angled wire respectively. The Line Spread Function (LSF) profile: raw pixel data (blue dots) are fitted with a Gaussian curve (red line) to correct for noise and undersampling. The calculated MTF curve derived from the Fourier Transform of the fitted Gaussian, showing the spatial frequencies at 50% and 10% modulation.</em>
 </p>
 
 <p align="center">
-  <img src="images/CTF Curve Analysis.png" alt = "" width="600">
+  <img src="images/CTF_Curve_Analysis.png" alt = "" width="400">
    <br>
   <em>Figure 2: Contrast Transfer Function (CTF) curve obtained from the discrete line pairs of the
 CTP732 module using the Peak-Valley method. The data points represent the modulation depth mea-
@@ -51,6 +48,15 @@ MTF.</em>
 
 ## Scientific Context & Clinical Impact
 This toolkit was utilized to prove that while 4D-CT phase-binning is highly accurate for regular sinusoidal breathing, it suffers from severe **amplitude truncation** during abrupt, asymmetric motion (e.g., Sawtooth)[cite: 20]. The signal processing scripts proved that the phantom mechanically executed the motion perfectly (RMS error < 0.5 mm)[cite: 17], meaning the observed 8.0% volume loss in the reconstructed target was entirely a temporal imaging artifact of the scanner[cite: 20]. 
+
+<p align="center">
+  <img src="images/Figure_1SAWTOOTH.png" alt = "" width="600">
+   <br>
+  <em>Figure 3: Signal analysis of the asymmetric Sawtooth breathing pattern. (Top) Raw displacement
+data overlaid with the filtered signal. (Middle) Alignment of the empirical trajectory against the
+theoretical sawtooth model. (Bottom) Residual error analysis, highlighting a stable mechanical motion
+(RMS = 0.41 mm) despite the abrupt nature of the waveform.</em>
+</p>
 
 This holds critical clinical implications for Stereotactic Body Radiotherapy (SBRT), as such volumetric underestimations can lead to a "marginal miss" of the tumor[cite: 20].
 
