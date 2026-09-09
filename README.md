@@ -1,1 +1,39 @@
 # Quality-Assurance-in-4D-Computed-Tomography
+4D-CT Quality Assurance & Motion Tracking Analytics
+
+## Overview
+This repository contains the data extraction, signal processing, and analytical software toolkit developed for my Bachelor Thesis in Physics: **"Quality Assurance in 4D Computed Tomography"** (Aristotle University of Thessaloniki & St. Luke's Hospital)[cite: 20]. 
+
+The project evaluates the geometric and volumetric accuracy of 4D-CT scanners when tracking moving targets (tumors) under various respiratory patterns[cite: 20]. The custom algorithms in this repository were built to bypass proprietary "black-box" software, allowing for direct processing of raw DICOM waveforms, theoretical mathematical modeling, and rigorous Spatial Resolution (MTF) analysis.
+
+---
+
+## Repository Architecture
+
+### 1. DICOM Waveform Extraction (`Python`)
+*Extracts and digitizes the respiratory surrogate signal recorded by the CT scanner.*
+*   **Deep DICOM Parsing:** Reads the `WaveformSequence` directly from the DICOM headers[cite: 15].
+*   **Byte Decoding:** Dynamically maps the `WaveformSampleInterpretation` (e.g., `US`, `SS`) to decode the raw byte buffers[cite: 15].
+*   **Physical Scaling:** Applies `ChannelSensitivity`, `CorrectionFactor`, and `Baseline` metadata to convert raw analog-to-digital values into exact physical displacements (mm) and exports them to CSV[cite: 15].
+
+###  2. Respiratory Signal Processing & Modeling (`Python`)
+*Evaluates the mechanical fidelity of the Dynamic Thorax Phantom across three 3D trajectories: Sinusoidal, $cos^6$, and Sawtooth[cite: 20].*
+*   **Noise Filtration:** Applies baseline centering and a 4th-order Low-Pass Butterworth filter (via `scipy.signal`) to eliminate high-frequency mechanical noise[cite: 14].
+*   **Mathematical Optimization:** Employs brute-force fitting algorithms to align theoretical motion models against the empirical tracking data[cite: 14].
+*   **Cycle-by-Cycle Statistics:** Automatically detects signal peaks (`find_peaks`) and calculates the Root Mean Square (RMS) error and standard deviations per individual breathing cycle to quantify temporal and spatial latency[cite: 14].
+
+### 3. Spatial Resolution & MTF Calculation (`MATLAB`)
+*Quantifies the spatial frequency limits of the CT scanner using the Catphan® 604 phantom[cite: 20].*
+*   **Gaussian Fitting Method (Point/Wire Sources):** Fits a continuous Gaussian curve to the discrete raw pixel data (LSF) using `fminsearch`, mitigating aliasing and background noise. Computes the FFT to extract the exact Modulation Transfer Function (MTF) at 50% and 10%[cite: 21].
+*   **Peak-Valley Method (Bar Patterns):** Calculates the Contrast Transfer Function (CTF) utilizing local minima and maxima across varying line-pair frequencies ($lp/cm$)[cite: 22].
+
+---
+
+## Scientific Context & Clinical Impact
+This toolkit was utilized to prove that while 4D-CT phase-binning is highly accurate for regular sinusoidal breathing, it suffers from severe **amplitude truncation** during abrupt, asymmetric motion (e.g., Sawtooth)[cite: 20]. The signal processing scripts proved that the phantom mechanically executed the motion perfectly (RMS error < 0.5 mm)[cite: 17], meaning the observed 8.0% volume loss in the reconstructed target was entirely a temporal imaging artifact of the scanner[cite: 20]. 
+
+This holds critical clinical implications for Stereotactic Body Radiotherapy (SBRT), as such volumetric underestimations can lead to a "marginal miss" of the tumor[cite: 20].
+
+##  Tech Stack
+*   **Languages:** Python 3.14, MATLAB
+*   **Libraries:** `pydicom`, `SciPy` (Signal Processing, Optimization), `NumPy`, `Pandas`, `Matplotlib`
