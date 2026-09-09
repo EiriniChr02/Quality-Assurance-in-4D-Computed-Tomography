@@ -55,7 +55,7 @@ This toolkit was utilized to prove that while 4D-CT phase-binning is highly accu
 This holds critical clinical implications for Stereotactic Body Radiotherapy (SBRT), as such volumetric underestimations can lead to a "marginal miss" of the tumor.
 
 ## Tech Stack
-*   **Languages:** Python 3.x, MATLAB
+*   **Languages:** Python 3.14, MATLAB
 *   **Libraries:** `pydicom`, `SciPy` (Signal Processing, Optimization), `NumPy`, `Pandas`, `Matplotlib`
 
 ## How to Use
