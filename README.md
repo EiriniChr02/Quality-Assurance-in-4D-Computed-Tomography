@@ -1,5 +1,6 @@
 # Quality-Assurance-in-4D-Computed-Tomography
-4D-CT Quality Assurance & Motion Tracking Analytics
+You may find the complete text of my Bachelor's Thesis in the following link, from the official library of the Aristotle University of Thessaloniki :
+[Quality Assurance in 4D Computed Tomography](https://ikee.lib.auth.gr/record/376170/?ln=el)
 
 ## Overview
 This repository contains the data extraction, signal processing, and analytical software toolkit developed for my Bachelor Thesis in Physics: **"Quality Assurance in 4D Computed Tomography"** (Aristotle University of Thessaloniki & St. Luke's Hospital). 
